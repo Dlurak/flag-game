@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ISO31661Entry } from "iso-3166";
 import { useCountries } from "@/hooks/countries";
 import { FinishedView, QuestionView } from "@/components/Views";
+import { toast } from "react-toastify";
 
 type Count = Record<string, number>;
 
@@ -27,8 +28,14 @@ export default function Home() {
 				{countries.length >= 1 && (
 					<QuestionView
 						country={countries[0]}
-						onCorrect={correct}
-						onIncorrect={incorrect}
+						onCorrect={() => {
+							toast.success("That was correct")
+							correct()
+						}}
+						onIncorrect={(entry) => {
+							toast.error(`That was ${entry.name}`)
+							incorrect()
+						}}
 						onSkip={skip}
 					/>
 				)}
