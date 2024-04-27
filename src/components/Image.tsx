@@ -3,11 +3,15 @@ import { FC } from "react";
 
 export const CountryImage: FC<{ country: ISO31661Entry }> = ({ country }) => {
 	return (
-		<img
-			src={`https://flagcdn.com/${country.alpha2.toLowerCase()}.svg`}
-			className="max-h-full max-w-full h-full object-contain w-auto"
-			alt={country.name}
-			key={country.name}
+		<div
+			className="max-h-full max-w-full h-full w-full"
+			style={{
+				backgroundImage: `url(https://flagcdn.com/${country.alpha2.toLowerCase()}.svg)`,
+				backgroundSize: "contain",
+				backgroundRepeat: "no-repeat",
+				backgroundPosition: "center"
+			}}
 		/>
 	);
 };
+

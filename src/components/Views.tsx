@@ -19,7 +19,7 @@ export const QuestionView: FC<QuestionProps> = ({
 }) => {
 	return (
 		<div className="h-full grid grid-rows-[3fr,1fr]">
-			<div className="flex items-center justify-center h-full ">
+			<div className="flex items-center justify-center h-full">
 				<div className="w-full md:w-3/4 h-5/6 flex items-center justify-center">
 					<CountryImage country={country} />
 				</div>
