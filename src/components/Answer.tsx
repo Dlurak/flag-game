@@ -22,8 +22,8 @@ const Button: FC<ButtonProps> = ({
 			}}
 			className={`px-3 py-2 rounded disabled:brightness-90 ${className}`}
 			disabled={disabled ?? false}
-		>
-			{children}
+			>
+		{children}
 		</button>
 	);
 };
@@ -48,30 +48,32 @@ export const Answer: FC<AnswerProps> = ({
 	const options = iso31661.map(({ name }) => ({ value: name, label: name }));
 
 	return (
-		<div className="flex gap-4 w-full md:w-3/4 lg:w-1/2">
+		<div className="flex gap-4 flex-col md:flex-row w-full md:w-3/4 lg:w-1/2 py-2">
 			<Select
 				key={`react_select_${country.name}` /*rerender when country changes*/}
 				options={options}
-				onChange={(e) => {
+			onChange={(e) => {
 					if (e) setUserInput(e.value);
 				}}
 				placeholder="Country"
 				className="w-full"
 				menuPlacement="top"
 			/>
-			<Button
-				onClick={() => {
-					if (userInput === country.name) onCorrect(country);
-					else onIncorrect(country);
-				}}
-				className="bg-green-400"
-				disabled={!userInput}
-			>
-				Submit
-			</Button>
-			<Button onClick={() => onSkip(country)} className="bg-blue-400">
-				Skip
-			</Button>
+			<div className="flex gap-4">
+				<Button onClick={() => onSkip(country)} className="bg-blue-400 w-1/3 md:w-fit">
+					Skip
+				</Button>
+				<Button
+					onClick={() => {
+						if (userInput === country.name) onCorrect(country);
+						else onIncorrect(country);
+					}}
+					className="bg-green-400 w-3/4 md:w-fit"
+					disabled={!userInput}
+					>
+					Submit
+				</Button>
+			</div>
 		</div>
 	);
 };

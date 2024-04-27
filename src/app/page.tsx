@@ -19,19 +19,22 @@ export default function Home() {
 	const { countries, correct, incorrect, skip } = useCountries({
 		onCorrect: incCounter,
 		onIncorrect: incCounter,
+		limit: 2
 	});
 
 	return (
 		<>
-			{countries.length >= 1 && (
-				<QuestionView
-					country={countries[0]}
-					onCorrect={correct}
-					onIncorrect={incorrect}
-					onSkip={skip}
-				/>
-			)}
-			{countries.length === 0 && <FinishedView />}
+			<div className="h-[100dvh] overflow-hidden">
+				{countries.length >= 1 && (
+					<QuestionView
+						country={countries[0]}
+						onCorrect={correct}
+						onIncorrect={incorrect}
+						onSkip={skip}
+					/>
+				)}
+				{countries.length === 0 && <FinishedView counts={countryCounts} />}
+			</div>
 		</>
 	);
 }
