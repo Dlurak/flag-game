@@ -19,12 +19,11 @@ export default function Home() {
 	const { countries, correct, incorrect, skip } = useCountries({
 		onCorrect: incCounter,
 		onIncorrect: incCounter,
-		limit: 2
 	});
 
 	return (
 		<>
-			<div className="h-[100dvh] overflow-hidden">
+			<div className="h-[100dvh] overflow-hidden-">
 				{countries.length >= 1 && (
 					<QuestionView
 						country={countries[0]}
