@@ -15,7 +15,7 @@ export const Input: FC<InputProps> = (props) => {
   }, [props.value]);
 
   return (
-    <div className="w-full rounded bg-zinc-200 flex overflow-hidden items-center dark:bg-zinc-600 gap-2 focus-within:outline focus-within:outline-2 focus-within:outline-emerald-500 outline-none h-full px-2">
+    <div className="w-full rounded bg-zinc-200 flex overflow-hidden items-center dark:bg-zinc-600 gap-2 focus-within:outline focus-within:outline-2 focus-within:outline-emerald-500 outline-none h-full p-2">
       <span>
         <MagnifyingGlassIcon className="h-6 w-6" />
       </span>
