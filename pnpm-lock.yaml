@@ -35,9 +35,6 @@ dependencies:
   react-toastify:
     specifier: ^10.0.5
     version: 10.0.5(react-dom@18.3.1)(react@18.3.1)
-  shork:
-    specifier: ^0.1.1
-    version: 0.1.1
 
 devDependencies:
   '@types/node':
@@ -2558,10 +2555,6 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
     dev: true
-
-  /shork@0.1.1:
-    resolution: {integrity: sha512-bOXvBhxYlU8CXxVKBsKkH80TT8SPvR+tmaeoQ0jCl4poJT24QkhygtfBVDSwAa5w46mK0CP5K8EAqcsmawa4kw==}
-    dev: false
 
   /side-channel@1.0.6:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}

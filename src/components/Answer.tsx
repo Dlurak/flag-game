@@ -1,6 +1,6 @@
 import { ISO31661Entry, iso31661 } from "iso-3166";
 import { type FC, type MouseEvent, ReactNode, useState } from "react";
-import { Select, type Option } from "./Select";
+import { Select, type Option } from "./Select/Select";
 
 interface ButtonProps {
 	children: ReactNode;
