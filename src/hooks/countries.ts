@@ -22,6 +22,12 @@ export const useCountries = (props: UseCountryProps) => {
 		setCountries(shuffle(countries));
 	}, []);
 
+	useEffect(() => {
+		setCountries(shuffle(
+		Object.entries(langs[props.lang]).slice(0, props.limit ?? Infinity),
+		))
+	}, [props.lang, props.limit])
+
 	return {
 		correct() {
 			if (props.onCorrect) props.onCorrect(countries[0]);

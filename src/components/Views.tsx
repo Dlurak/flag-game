@@ -4,13 +4,14 @@ import { Answer } from "./Answer";
 import Image from "next/image"
 import { Country } from "@/types/Country";
 import { useCodeObj } from "@/hooks/useCodeObj";
-import { CountryName } from "@/constants/countries";
+import { CountryName, Locale } from "@/constants/countries";
 
 interface QuestionProps {
 	country: Country
 	onCorrect: (country: Country) => void;
 	onIncorrect: (country: Country) => void;
 	onSkip: (country: Country) => void;
+	lang: Locale
 }
 
 export const QuestionView: FC<QuestionProps> = ({
@@ -18,6 +19,7 @@ export const QuestionView: FC<QuestionProps> = ({
 	onCorrect,
 	onIncorrect,
 	onSkip,
+	lang
 }) => {
 	return (
 		<div className="h-full grid grid-rows-[3fr,1fr]">
@@ -33,6 +35,7 @@ export const QuestionView: FC<QuestionProps> = ({
 					onCorrect={onCorrect}
 					onIncorrect={onIncorrect}
 					onSkip={onSkip}
+					lang={lang}
 				/>
 			</div>
 		</div>
@@ -41,6 +44,7 @@ export const QuestionView: FC<QuestionProps> = ({
 
 interface FinishedProps {
 	counts: Record<string, number>;
+	lang: Locale
 }
 
 const Cell: FC<{ isHead?: boolean; children: ReactNode }> = (props) => {
@@ -49,12 +53,10 @@ const Cell: FC<{ isHead?: boolean; children: ReactNode }> = (props) => {
 	return <td className="border px-2 py-1">{props.children}</td>;
 };
 
-export const FinishedView: FC<FinishedProps> = ({ counts }) => {
+export const FinishedView: FC<FinishedProps> = ({ counts, lang }) => {
 	const entries = Object.entries(counts);
 	const sortedEntries = entries.sort(([_, a], [__, b]) => b - a);
-	const countries = useCodeObj({
-		lang: "en"
-	})
+	const countries = useCodeObj({ lang })
 
 	const [displayedEntries, setDisplayedEntries] = useState(sortedEntries);
 	const reverse = () => setDisplayedEntries((old) => old.toReversed());
@@ -82,7 +84,7 @@ export const FinishedView: FC<FinishedProps> = ({ counts }) => {
 				</thead>
 				<tbody>
 					{displayedEntries.map(([country, count]) => {
-						const code = countries[country as CountryName]
+						const code = countries[country as CountryName] || ""
 						const flagUrl = `https://flagcdn.com/${code.toLowerCase()}.svg`
 
 						return (

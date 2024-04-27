@@ -2,6 +2,7 @@ import { type FC, type MouseEvent, ReactNode, useState } from "react";
 import { Select, type Option } from "./Select/Select";
 import { Country } from "@/types/Country";
 import { useCodeObj } from "@/hooks/useCodeObj";
+import { Locale } from "@/constants/countries";
 
 interface ButtonProps {
 	children: ReactNode;
@@ -35,7 +36,8 @@ interface AnswerProps {
 	onCorrect: CountryEventHandler;
 	onIncorrect: CountryEventHandler;
 	onSkip: CountryEventHandler;
-	country: Country
+	country: Country;
+	lang: Locale
 }
 
 export const Answer: FC<AnswerProps> = ({
@@ -43,11 +45,10 @@ export const Answer: FC<AnswerProps> = ({
 	onIncorrect,
 	onCorrect,
 	onSkip,
+	lang
 }) => {
 	const [selected, setSelected] = useState<Option | null>(null);
-	const codeObj = useCodeObj({
-		lang: "en"
-	})
+	const codeObj = useCodeObj({ lang })
 
 	const options = Object.entries(codeObj).map(([name]) => ({ value: name, label: name }))
 
