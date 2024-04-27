@@ -1,6 +1,7 @@
-import { ISO31661Entry, iso31661 } from "iso-3166";
 import { type FC, type MouseEvent, ReactNode, useState } from "react";
 import { Select, type Option } from "./Select/Select";
+import { Country } from "@/types/Country";
+import { useCodeObj } from "@/hooks/useCodeObj";
 
 interface ButtonProps {
 	children: ReactNode;
@@ -28,13 +29,13 @@ const Button: FC<ButtonProps> = ({
 	);
 };
 
-type CountryEventHandler = (country: ISO31661Entry) => void;
+type CountryEventHandler = (country: Country) => void;
 
 interface AnswerProps {
 	onCorrect: CountryEventHandler;
 	onIncorrect: CountryEventHandler;
 	onSkip: CountryEventHandler;
-	country: ISO31661Entry;
+	country: Country
 }
 
 export const Answer: FC<AnswerProps> = ({
@@ -44,11 +45,14 @@ export const Answer: FC<AnswerProps> = ({
 	onSkip,
 }) => {
 	const [selected, setSelected] = useState<Option | null>(null);
+	const codeObj = useCodeObj({
+		lang: "en"
+	})
 
-	const options = iso31661.map(({ name }) => ({ value: name, label: name }));
+	const options = Object.entries(codeObj).map(([name]) => ({ value: name, label: name }))
 
 	const submit = () => {
-		if (selected?.value === country.name) onCorrect(country);
+		if (selected?.value === country[0]) onCorrect(country);
 		else onIncorrect(country);
 
 		setSelected(null)

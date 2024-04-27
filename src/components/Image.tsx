@@ -1,12 +1,12 @@
-import { ISO31661Entry } from "iso-3166";
+import { Country } from "@/types/Country";
 import { FC } from "react";
 
-export const CountryImage: FC<{ country: ISO31661Entry }> = ({ country }) => {
+export const CountryImage: FC<{ country: Country }> = ({ country }) => {
 	return (
 		<div
 			className="max-h-full max-w-full h-full w-full"
 			style={{
-				backgroundImage: `url(https://flagcdn.com/${country.alpha2.toLowerCase()}.svg)`,
+				backgroundImage: `url(https://flagcdn.com/${country[1].toLowerCase()}.svg)`,
 				backgroundSize: "contain",
 				backgroundRepeat: "no-repeat",
 				backgroundPosition: "center"

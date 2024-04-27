@@ -1,18 +1,21 @@
 import { shuffle } from "@/utils/arrays/shuffle";
-import { ISO31661Entry, iso31661 } from "iso-3166";
 import { useEffect, useState } from "react";
+import { Country } from "@/types/Country";
+import { Locale, langs } from "@/constants/countries";
 
 interface UseCountryProps {
+	lang: Locale
+
 	limit?: number;
 
-	onCorrect?: (country: ISO31661Entry) => void;
-	onIncorrect?: (country: ISO31661Entry) => void;
-	onSkip?: (country: ISO31661Entry) => void;
+	onCorrect?: (country: Country) => void;
+	onIncorrect?: (country: Country) => void;
+	onSkip?: (country: Country) => void;
 }
 
 export const useCountries = (props: UseCountryProps) => {
 	const [countries, setCountries] = useState(
-		iso31661.slice(0, props.limit ?? Infinity),
+		Object.entries(langs[props.lang]).slice(0, props.limit ?? Infinity),
 	);
 
 	useEffect(() => {

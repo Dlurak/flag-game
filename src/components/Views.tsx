@@ -1,14 +1,16 @@
-import { ISO31661Entry, iso31661 } from "iso-3166";
 import { FC, ReactNode, useState } from "react";
 import { CountryImage } from "./Image";
 import { Answer } from "./Answer";
 import Image from "next/image"
+import { Country } from "@/types/Country";
+import { useCodeObj } from "@/hooks/useCodeObj";
+import { CountryName } from "@/constants/countries";
 
 interface QuestionProps {
-	country: ISO31661Entry;
-	onCorrect: (country: ISO31661Entry) => void;
-	onIncorrect: (country: ISO31661Entry) => void;
-	onSkip: (country: ISO31661Entry) => void;
+	country: Country
+	onCorrect: (country: Country) => void;
+	onIncorrect: (country: Country) => void;
+	onSkip: (country: Country) => void;
 }
 
 export const QuestionView: FC<QuestionProps> = ({
@@ -50,6 +52,9 @@ const Cell: FC<{ isHead?: boolean; children: ReactNode }> = (props) => {
 export const FinishedView: FC<FinishedProps> = ({ counts }) => {
 	const entries = Object.entries(counts);
 	const sortedEntries = entries.sort(([_, a], [__, b]) => b - a);
+	const countries = useCodeObj({
+		lang: "en"
+	})
 
 	const [displayedEntries, setDisplayedEntries] = useState(sortedEntries);
 	const reverse = () => setDisplayedEntries((old) => old.toReversed());
@@ -77,9 +82,8 @@ export const FinishedView: FC<FinishedProps> = ({ counts }) => {
 				</thead>
 				<tbody>
 					{displayedEntries.map(([country, count]) => {
-						const code = iso31661.find(({ name }) => name === country)?.alpha2.toLowerCase()
-						const flagUrl = `https://flagcdn.com/${code}.svg`
-
+						const code = countries[country as CountryName]
+						const flagUrl = `https://flagcdn.com/${code.toLowerCase()}.svg`
 
 						return (
 							<tr key={`${country}-${count}`}>

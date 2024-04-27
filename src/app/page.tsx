@@ -1,23 +1,25 @@
 "use client";
 import { useState } from "react";
-import { ISO31661Entry } from "iso-3166";
 import { useCountries } from "@/hooks/countries";
 import { FinishedView, QuestionView } from "@/components/Views";
 import { toast } from "react-toastify";
+import { Country } from "@/types/Country";
 
 type Count = Record<string, number>;
 
 export default function Home() {
 	const [countryCounts, setCountryCounts] = useState<Count>({});
 
-	const incCounter = (entry: ISO31661Entry) => {
+	const incCounter = (entry: Country) => {
 		setCountryCounts((old) => ({
 			...old,
-			[entry.name]: (old[entry.name] ?? 0) + 1,
+			[entry[0]]: (old[entry[0]] ?? 0) + 1,
 		}));
 	};
 
 	const { countries, correct, incorrect, skip } = useCountries({
+		limit: 1,
+		lang: "en",
 		onCorrect: incCounter,
 		onIncorrect: incCounter,
 	});
@@ -33,7 +35,7 @@ export default function Home() {
 							correct()
 						}}
 						onIncorrect={(entry) => {
-							toast.error(`That was ${entry.name}`)
+							toast.error(`That was ${entry[0]}`)
 							incorrect()
 						}}
 						onSkip={skip}
