@@ -139,7 +139,6 @@ const countries = {
   "Philippines": "PH",
   "Poland": "PL",
   "Portugal": "PT",
-  "Puerto Rico": "PR",
   "Qatar": "QA",
   "Romania": "RO",
   "Russian Federation": "RU",
